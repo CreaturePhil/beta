@@ -6,3 +6,6 @@ npm-debug.log
 
 # Code Coverage reports
 coverage
+
+# bower_components
+public/bower_components
