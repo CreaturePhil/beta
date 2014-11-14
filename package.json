@@ -1,5 +1,5 @@
 {
-  "name": "alpha",
+  "name": "beta",
   "version": "0.0.0",
   "scripts": {
     "start": "node ./bin/www",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/creaturephil/alpha.git"
+    "url": "https://github.com/creaturephil/beta.git"
   },
   "dependencies": {
     "errorhandler": "^1.2.2",
