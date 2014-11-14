@@ -7,4 +7,7 @@ var router = express.Router();
 router.route('/')
   .get(mainController.index);
 
+router.route('/about')
+  .get(mainController.about);
+
 module.exports = router;

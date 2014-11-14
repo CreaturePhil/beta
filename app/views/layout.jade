@@ -10,6 +10,24 @@ html(lang="en-us")
 
     title #{title}
 
+    link(rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css")
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
   body
 
-    block content
+    include partials/navbar
+
+    .container
+      block content
+
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" data-no-instant)
+    script(src="/bower_components/bootstrap/dist/js/bootstrap.min.js" data-no-instant)
+    script(src="/js/headroom.min.js" data-no-instant)
+    script(src="/js/instantclick.min.js" data-no-instant)
+    script(data-no-instant) InstantClick.init();
+
