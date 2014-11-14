@@ -11,6 +11,14 @@ $ npm install && bower install
 $ npm start
 ```
 
+## Project Structure
+
+WIP
+
+## Deployment and Configuration
+
+WIP
+
 ## License
 
 Copyright (c) 2014 Philip La
