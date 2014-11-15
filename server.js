@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')({ session: session });
+var expressValidator = require('express-validator');
 var flash = require('express-flash');
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -13,6 +14,7 @@ var lusca = require('lusca');
 
 var routes = require('./config/routes');
 var secrets = require('./config/secrets');
+var validators = require('./lib/validators');
 
 var app = express();
 
@@ -44,6 +46,7 @@ if (app.get('env') === 'development') {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator({ customValidators: validators }));
 app.use(cookieParser());
 app.use(session({
   resave: true,

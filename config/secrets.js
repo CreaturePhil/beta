@@ -1,4 +1,5 @@
 var router = require('./routes');
+var debug = require('../lib/debug');
 
 module.exports = {
 
@@ -11,7 +12,7 @@ module.exports = {
     password: process.env.SENDGRID_PASSWORD || 'hspassword00'
   },
 
-  banUsernames: getBanUsernames()
+  banUsernames: []
 
 };
 
@@ -23,7 +24,6 @@ function getBanUsernames() {
   var usernames = [];
   var routes = router.stack;
   var len = routes.length;
-
   while(len--) {
     usernames.push(routes[len].route.path.substr(1));
   }
