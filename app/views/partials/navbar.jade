@@ -6,13 +6,15 @@
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(href="/") Beta
+      a.navbar-brand(href="/") Markus
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        li(class=title==='Beta'?'active':undefined)
+        li(class=title==='Home'?'active':undefined)
           a(href="/") Home
         li(class=title==='About'?'active':undefined)
           a(href="/about") About
+        li(class=title==='Contact'?'active':undefined)
+          a(href="/contact") Contact
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=title==='Sign Up'?'active':undefined)
@@ -20,10 +22,6 @@
           li(class=title==='Login'?'active':undefined)
             a(href="/login") Login
         else
-          li.post
-            a(data-toggle="modal" data-target="#post")
-              span.fa.fa-send
-              | &nbsp;New Post
           li.dropdown
             a.dropdown-toggle(href='#', data-toggle='dropdown')
               img(src='#{user.profile.avatar || user.gravatar(60)}' alt="Profile Pic")
@@ -38,10 +36,6 @@
                 a(href='/settings/account')
                   span.fa.fa-cogs
                   | &nbsp;Account Settings
-              li
-                a(href='/support')
-                  span.fa.fa-life-buoy
-                  | &nbsp;Support
               li.divider
               li
                 a(href='/logout')

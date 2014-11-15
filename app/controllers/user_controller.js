@@ -72,7 +72,7 @@ module.exports = {
       });
     },
 
-    post: function(req, res) {
+    post: function(req, res, next) {
       req.assert('username', 'Only letters and numbers are allow in username.').regexMatch(/^[A-Za-z0-9]*$/);
       req.assert('username', 'Username cannot be more than 30 characters.').len(1, 30);
       req.assert('password', 'Password cannot be blank').notEmpty();
