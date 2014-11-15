@@ -10,6 +10,6 @@ module.exports = {
     res.render('about', {
       title: 'About'
     });
-  },
+  }
 
 };

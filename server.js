@@ -1,12 +1,30 @@
 var express = require('express');
+var path = require('path');
 var morgan = require('morgan');
 var errorhandler = require('errorhandler');
-
-var path = require('path');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')({ session: session });
+var flash = require('express-flash');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var lusca = require('lusca');
 
 var routes = require('./config/routes');
+var secrets = require('./config/secrets');
 
 var app = express();
+
+/**
+ * Connect to MongoDB.
+ */
+
+mongoose.connect(secrets.db);
+mongoose.connection.on('error', function() {
+  console.error('MongoDB Connection Error. Make sure MongoDB is running.');
+});
+
 
 /**
  * App configuration
@@ -23,6 +41,29 @@ if (app.get('env') === 'development') {
   // turn on console logging
   app.use(morgan('dev'));
 }
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: secrets.sessionSecret,
+  store: new MongoStore({
+    url: secrets.db,
+    auto_reconnect: true
+  })
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+app.use(lusca.csrf());
+
+app.use(function(req, res, next) {
+  // Make user object available in templates.
+  res.locals.user = req.user;
+  next();
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 
