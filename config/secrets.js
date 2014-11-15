@@ -15,11 +15,14 @@ module.exports = {
 
 };
 
+/**
+ * Ban usernames that are the same as routes because
+ * the server maps username to the index route (/).
+ */
 function getBanUsernames() {
   var usernames = [];
   var routes = router.stack;
-  var len = routes.length
-  var path;
+  var len = routes.length;
 
   while(len--) {
     usernames.push(routes[len].route.path.substr(1));
