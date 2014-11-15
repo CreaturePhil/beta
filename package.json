@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha --reporter=spec --timeout=10000",
+    "test": "mocha --reporter=spec --timeout=10000 && grunt test",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --timeout=10000",
     "codeclimate": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | codeclimate && rm -rf ./coverage"
   },
