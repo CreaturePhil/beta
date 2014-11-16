@@ -62,6 +62,7 @@ app.use(passport.session());
 app.use(flash());
 app.use(lusca.csrf());
 
+app.locals.env = app.get('env'); // Make NODE_ENV available in templates.
 app.use(function(req, res, next) {
   // Make user object available in templates.
   res.locals.user = req.user;
