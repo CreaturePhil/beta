@@ -8,6 +8,7 @@ block content
       h1= User.username
       if User.profile.bio
         h4.text-muted= User.profile.bio
+      p Joined on #{moment(User.profile.joinDate).format('MMMM D, YYYY')}
       if User.profile.location
         p Location: #{User.profile.location}
       if User.profile.website
