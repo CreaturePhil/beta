@@ -3,7 +3,8 @@ extends ../layout
 block content
   .row
     .col-md-6.col-md-offset-3
-      h1.text-center.space-bottom-20 Login
+      h1.text-center Login
+      br
       form(role="form" method="post")
         input(type="hidden" name="_csrf" value=_csrf)
         .form-group
@@ -12,6 +13,16 @@ block content
         .form-group
           label Password
           input.form-control(type="password" name="password" required)
-        a(href="/forgot_password") Forgot your password?
+        .form-group.clearfix
+          .checkbox
+            label.pull-left
+              input(type="checkbox" name="remember")
+              | Keep me logged in
+          a.pull-right(href="/forgot_password") Forgot your password?
+        br
         .form-group
           button.btn.btn-primary.center-block(type="submit") Login
+      .text-center
+        p.text-muted
+          | Don't have an account? 
+          a(href="/signup") Sign up

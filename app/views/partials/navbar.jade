@@ -21,7 +21,7 @@
             a(href="/login") Login
         else
           li.dropdown
-            a.dropdown-toggle(href='#', data-toggle='dropdown')
+            a.dropdown-toggle(href='#', data-toggle='dropdown' data-no-instant)
               img(src='#{user.profile.avatar || user.gravatar(60)}' alt="Profile Pic")
               | #{user.username || user.email || user.id}&nbsp;
               i.caret

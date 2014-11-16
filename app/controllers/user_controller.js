@@ -61,6 +61,7 @@ module.exports = {
         function(done) {
           user.save(function(err) {
             req.logIn(user, function(err) {
+              req.flash('success', { msg: 'Success! Your account has been created.' });
               done(err);
             });
           });
@@ -75,11 +76,8 @@ module.exports = {
   login: {
     get: function(req, res) {
       if (req.user) return res.redirect('/');
-      res.render('user/login', {
-        title: 'Login'
-      });
+      res.render('user/login', { title: 'Login' });
     },
-
     post: function(req, res, next) {
       req.assert('username', 'Only letters and numbers are allow in username.').regexMatch(/^[A-Za-z0-9]*$/);
       req.assert('username', 'Username cannot be more than 30 characters.').len(1, 30);
@@ -90,6 +88,12 @@ module.exports = {
       if (errors) {
         req.flash('errors', errors);
         return res.redirect('/login');
+      }
+
+      if (req.body.remember) {
+        req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 30; // 30 days
+      } else {
+        req.session.cookie.expires = false;
       }
 
       passport.authenticate('local', function(err, user, info) {
