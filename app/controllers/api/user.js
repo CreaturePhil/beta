@@ -1,7 +1,10 @@
 var async = require('async');
-var debug = require('../../../lib/debug');
+var Hashids = require('hashids');
 
+var secrets = require('../../../config/secrets');
 var User = require('../../models/user');
+
+var hashids = new Hashids(secrets.hash);
 
 module.exports = {
 
@@ -19,6 +22,16 @@ module.exports = {
       });
     });
   },
+
+  show: function(req, res, next) {
+    User.findById(hashids.decodeHex(req.params.id), function(err, userModel) {
+      if (err) return next(err);
+      user = userModel.toObject();
+      user._id = userModel.getHash();
+      remove(user, 'email', 'password', '__v', 'resetPasswordToken', 'resetPasswordExpires');
+      res.json(user);
+    });
+  }
 
 };
 
