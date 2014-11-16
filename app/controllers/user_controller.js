@@ -11,11 +11,8 @@ module.exports = {
   signup: {
     get: function(req, res) {
       if (req.user) return res.redirect('/');
-      res.render('user/signup', {
-        title: 'Create Account'
-      });
+      res.render('user/signup', { title: 'Create Account' });
     },
-
     post: function(req, res, next) {
       req.assert('username', 'Only letters and numbers are allow in username.').regexMatch(/^[A-Za-z0-9]*$/);
       req.assert('username', 'Username cannot be more than 30 characters.').len(1, 30);
@@ -38,29 +35,40 @@ module.exports = {
       });
 
       if (secrets.banUsernames.indexOf(user.uid) >= 0) {
-        req.flash('errors', { msg: 'Your username cannot be called that.' })
+        req.flash('errors', { msg: 'Your username cannot be called that.' });
         return res.redirect('signup');
       }
 
-      User.findOne({ email: req.body.email }, function(err, existingUser) {
-        if (existingUser) {
-          req.flash('errors', { msg: 'Account with that email address already exists.' });
-          return res.redirect('/signup');
-        }
-        User.findOne({ uid: req.body.username.toLowerCase() }, function(err, existingUser) {
-          if (existingUser) {
-            req.flash('errors', { msg: 'Account with that username already exists.' });
-            return res.redirect('/signup');
-          }
+      async.series([
+        function(done) {
+          User.findOne({ email: req.body.email }, function(err, existingUser) {
+            if (existingUser) {
+              req.flash('errors', { msg: 'Account with that email address already exists.' });
+              return res.redirect('/signup');
+            }
+            done(err);
+          });
+        },
+        function(done) {
+          User.findOne({ uid: req.body.username.toLowerCase() }, function(err, existingUser) {
+            if (existingUser) {
+              req.flash('errors', { msg: 'Account with that username already exists.' });
+              return res.redirect('/signup');
+            }
+            done(err);
+          });
+        },
+        function(done) {
           user.save(function(err) {
-            if (err) return next(err);
             req.logIn(user, function(err) {
-              if (err) return next(err);
-              res.redirect('/');
+              done(err);
             });
           });
-        });
-      }); 
+        }
+      ], function(err) {
+        if (err) next(err);
+        res.redirect('/');
+      });
     }
   },
 

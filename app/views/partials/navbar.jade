@@ -6,20 +6,18 @@
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(href="/") Markus
+      a.navbar-brand(href="/") Beta
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        li(class=title==='Home'?'active':undefined)
+        li
           a(href="/") Home
-        li(class=title==='About'?'active':undefined)
+        li
           a(href="/about") About
-        li(class=title==='Contact'?'active':undefined)
-          a(href="/contact") Contact
       ul.nav.navbar-nav.navbar-right
         if !user
-          li(class=title==='Sign Up'?'active':undefined)
+          li
             a(href="/signup") Sign Up
-          li(class=title==='Login'?'active':undefined)
+          li
             a(href="/login") Login
         else
           li.dropdown
