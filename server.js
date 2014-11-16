@@ -16,6 +16,7 @@ var moment = require('moment');
 var routes = require('./config/routes');
 var secrets = require('./config/secrets');
 var validators = require('./lib/validators');
+var csp = require('./lib/csp');
 
 var app = express();
 
@@ -62,6 +63,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(lusca.csrf());
+
+if (app.get('env') === 'production') {
+  app.use(lusca.csp(csp));
+  app.use(lusca.xframe('DENY'));
+  app.use(lusca.p3p('ABCDEF'));
+  app.use(lusca.hsts({ maxAge: 7776000000 })); // 90 days
+  app.use(lusca.xssProtection(true));
+}
 
 app.locals.env = app.get('env'); // Make NODE_ENV available in templates.
 app.locals.moment = moment; // Make moment function available in templates.
