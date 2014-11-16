@@ -4,7 +4,7 @@ var resource = require('../lib/resource');
 
 var mainController = require('../app/controllers/main_controller');
 var userController = require('../app/controllers/user_controller');
-var apiUserController = require('../app/controllers/api/user');
+var apiUsersController = require('../app/controllers/api/users');
 var login_required = require('./passport').isAuthenticated;
 
 var router = express.Router();
@@ -46,7 +46,7 @@ router.route('/settings/delete')
   .get(login_required, userController.deleteAccount.get)
   .post(login_required, userController.deleteAccount.post);
 
-resource('/api/users', apiUserController, router);
+resource('/api/users', apiUsersController, router);
 
 router.route('/:user')
   .get(userController.profile);
