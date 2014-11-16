@@ -25,7 +25,6 @@
     "express-validator": "^2.6.0",
     "hashids": "^1.0.1",
     "jade": "^1.7.0",
-    "lodash": "^2.4.1",
     "lusca": "^1.0.2",
     "moment": "^2.8.3",
     "mongoose": "^3.8.18",
