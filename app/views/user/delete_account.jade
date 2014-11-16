@@ -1,8 +1,8 @@
 extends ../layout
 
 block content
-  .text-center.space-bottom-50
-    h1.text-danger.space-bottom-20 Are you sure you want to delete your account?
+  .text-center
+    h1.text-danger Are you sure you want to delete your account?
     p You can delete your account, but keep in mind this action is irreversible.
   form(role="form" method="post")
     input(type="hidden" name="_csrf" value=_csrf)

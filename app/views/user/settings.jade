@@ -18,11 +18,6 @@ block content
         form.form-horizontal(role="form" method="post")
           input(type="hidden" name="_csrf" value=_csrf)
           .form-group
-            label.col-sm-2.control-label Favorite Band(s)
-            .col-sm-10
-              input.form-control(type="text" name="band" value="#{user.profile.favoriteBands}")
-              p.help-block Put your favorite bands in order here. Seperate them with commas.
-          .form-group
             label.col-sm-2.control-label Avatar
             .col-sm-10
               input.form-control(type="text" name="avatar" value="#{user.profile.avatar}")
@@ -33,7 +28,7 @@ block content
             label.col-sm-2.control-label Username
             .col-sm-10
               input.form-control(type="text" name="username" value="#{user.username}" required)
-              p.help-block http://localhost:3000/#{user.username.uid}
+              p.help-block http://localhost:3000/#{user.uid}
           .form-group
             label.col-sm-2.control-label Email
             .col-sm-10
@@ -52,15 +47,16 @@ block content
           .form-group
             label.col-sm-2.control-label Bio
             .col-sm-10
-              textarea.form-control(name="bio" rows="3") #{user.profile.bio}
+              textarea.form-control.bio(name="bio" rows="3") #{user.profile.bio}
               p.help-block About yourself in 160 characters or less.
-                span.count.pull-right
+                span.count.pull-right 160
           .form-group
             .col-sm-offset-2.col-sm-4
               button.btn.btn-primary(type="submit") Save Changes
         hr
-        .space-bottom-20
-          a(href="/settings/delete") Delete my account
+        a(href="/settings/delete") Delete my account
+        br
+        br
       if title === 'Password'
         form(role="form" method="post")
           input(type="hidden" name="_csrf" value=_csrf)
@@ -72,14 +68,3 @@ block content
             input.form-control(type="password" name="confirmPassword" required)
           .form-group
             button.btn.btn-primary(type="submit") Save Changes
-
-block bottom
-  script(data-no-instant).
-    $(function() {
-      var $textarea = $('textarea');
-      var $count = $('.count');
-      $count.text((160 - $textarea.val().length));
-      $textarea.keyup(function(){
-        $count.text((160 - $(this).val().length));
-      });
-    });

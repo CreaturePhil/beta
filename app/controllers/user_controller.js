@@ -119,11 +119,8 @@ module.exports = {
   forgotPassword: {
     get: function(req, res) {
       if (req.isAuthenticated()) return res.redirect('/');
-      res.render('user/forgot_password', {
-        title: 'Forgot Password'
-      });
+      res.render('user/forgot_password', { title: 'Forgot Password' });
     },
-    
     post: function(req, res, next) {
       req.assert('email', 'Please enter a valid email address.').isEmail();
 
@@ -159,19 +156,16 @@ module.exports = {
           function(token, user, done) {
             var transporter = nodemailer.createTransport({
               service: 'SendGrid',
-            auth: {
-              user: secrets.sendgrid.user,
-            pass: secrets.sendgrid.password
-            }
+              auth: {
+                user: secrets.sendgrid.user,
+                pass: secrets.sendgrid.password
+              }
             });
             var mailOptions = {
               to: user.email,
-              from: 'markus@markus.com',
-              subject: 'Reset your password on Markus',
-              text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n' +
-                'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                'http://' + req.headers.host + '/reset_password/' + token + '\n\n' +
-                'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+              from: 'creaturephil@gmail.com',
+              subject: 'Reset your password',
+              text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n' + 'Please click on the following link, or paste this into your browser to complete the process:\n\n' + 'http://' + req.headers.host + '/reset_password/' + token + '\n\n' + 'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             };
             transporter.sendMail(mailOptions, function(err) {
               req.flash('info', { msg: 'An e-mail has been sent to ' + user.email + ' with further instructions.' });
@@ -187,21 +181,16 @@ module.exports = {
 
   resetPassword: {
     get: function(req, res) {
-      if (req.isAuthenticated()) return res.redirect('/');
-      User
-        .findOne({ resetPasswordToken: req.params.token })
+      User.findOne({ resetPasswordToken: req.params.token })
         .where('resetPasswordExpires').gt(Date.now())
         .exec(function(err, user) {
           if (!user) {
             req.flash('errors', { msg: 'Password reset token is invalid or has expired.' });
             return res.redirect('/forgot');
           }
-          res.render('user/reset_password', {
-            title: 'Password Reset'
-          });
+          res.render('user/reset_password', { title: 'Password Reset' });
         });
     },
-
     post: function(req, res, next) {
       req.assert('password', 'Password must be at least 4 characters long.').len(4);
       req.assert('confirmPassword', 'Passwords must match.').equals(req.body.password);
@@ -215,8 +204,7 @@ module.exports = {
 
       async.waterfall([
         function(done) {
-          User
-            .findOne({ resetPasswordToken: req.params.token })
+          User.findOne({ resetPasswordToken: req.params.token })
             .where('resetPasswordExpires').gt(Date.now())
             .exec(function(err, user) {
               if (!user) {
@@ -246,10 +234,9 @@ module.exports = {
           });
           var mailOptions = {
             to: user.email,
-            from: 'markus@markus.com',
-            subject: 'Your Markus password has been changed',
-            text: 'Hello,\n\n' +
-              'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+            from: 'creaturephil@gmail.com',
+            subject: 'Your password has been changed',
+            text: 'Hello,\n\n' + 'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
           };
           transporter.sendMail(mailOptions, function(err) {
             req.flash('success', { msg: 'Success! Your password has been changed.' });
@@ -270,7 +257,6 @@ module.exports = {
         description: 'Change your basic account settings.'
       });
     },
-    
     post: function(req, res, next) {
       req.body.avatar && req.assert('avatar', 'Must be .png, .jpg, or .gif').regexMatch(/(https?:\/\/.*\.(?:png|jpg|gif))/i);
       req.assert('username', 'Only letters and numbers are allow in username.').regexMatch(/^[A-Za-z0-9]*$/);
@@ -312,7 +298,6 @@ module.exports = {
         description: 'Change your password.'
       });
     },
-
     post: function(req, res, next) {
       req.assert('password', 'Password must be at least 4 characters long').len(4);
       req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
@@ -340,11 +325,8 @@ module.exports = {
 
   deleteAccount: {
     get: function(req, res) {
-      res.render('user/delete_account', {
-        title: 'Delete'
-      }); 
+      res.render('user/delete_account', { title: 'Delete' }); 
     },
-
     post: function(req, res, next) {
       User.remove({ _id: req.user.id }, function(err) {
         if (err) return next(err);

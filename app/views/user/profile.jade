@@ -6,9 +6,11 @@ block content
       img.avatar.center-block(src="#{User.profile.avatar || User.gravatar()}" alt="avatar profile")
     .col-md-8
       h1= User.username
-    if User.profile.location
-      h4 Location: #{User.profile.location}
-    if User.profile.website
-      a(href="#{User.profile.website}")= User.profile.website
-    if User.profile.bio
-      p= User.profile.bio
+      if User.profile.bio
+        h4.text-muted= User.profile.bio
+      if User.profile.location
+        p Location: #{User.profile.location}
+      if User.profile.website
+        p 
+          | Website: 
+          a(href="#{User.profile.website}")= User.profile.website
