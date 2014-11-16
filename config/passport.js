@@ -1,7 +1,11 @@
 var passport = require('passport');
+var Hashids = require('hashids');
 var LocalStrategy = require('passport-local').Strategy;
+
 var User = require('../app/models/user');
 var secrets = require('./secrets');
+
+var hashids = new Hashids(secrets.hash);
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -31,4 +35,10 @@ passport.use(new LocalStrategy({ usernameField: 'username' }, function(username,
 exports.isAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) return next();
   res.redirect('/login');
+};
+
+// Login required middleware.
+exports.isUser = function(req, res, next) {
+  if (req.user.getHash() === req.params.id) return next();
+  res.status(500).json({ error: 'Access denied.' });
 };

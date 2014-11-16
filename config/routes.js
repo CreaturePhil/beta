@@ -1,7 +1,10 @@
 var express = require('express');
 
+var resource = require('../lib/resource');
+
 var mainController = require('../app/controllers/main_controller');
 var userController = require('../app/controllers/user_controller');
+var apiUserController = require('../app/controllers/api/user');
 var login_required = require('./passport').isAuthenticated;
 
 var router = express.Router();
@@ -42,6 +45,11 @@ router.route('/settings/password')
 router.route('/settings/delete')
   .get(login_required, userController.deleteAccount.get)
   .post(login_required, userController.deleteAccount.post);
+
+router.route('/api/user')
+  .get(apiUserController.index);
+
+resource('/api/users', apiUserController, router);
 
 router.route('/:user')
   .get(userController.profile);
