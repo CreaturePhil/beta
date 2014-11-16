@@ -11,8 +11,7 @@ module.exports = {
       async.map(users, function(userModel, cb) {
         user = userModel.toObject();
         user._id = userModel.getHash();
-        delete user.password;
-        delete user.__v;
+        remove(user, 'email', 'password', '__v', 'resetPasswordToken', 'resetPasswordExpires');
         cb(null, user);
       }, function(err, results) {
         if (err) return next(err);
@@ -22,3 +21,15 @@ module.exports = {
   },
 
 };
+
+/**
+ * Delete one or more object's properties.
+ * @param {Object} obj
+ */
+function remove(obj) {
+  var len = arguments.length;
+  while(len--) {
+    if (len === 0) break;
+    delete obj[arguments[len]];
+  }
+}
