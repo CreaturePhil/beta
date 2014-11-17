@@ -1,4 +1,5 @@
 {
   "curly": false,
-  "maxcomplexity": 200
+  "maxcomplexity": false,
+  "node": true,  
 }
