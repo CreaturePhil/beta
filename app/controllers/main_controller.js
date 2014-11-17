@@ -1,4 +1,3 @@
-var debug = require('../../lib/debug');
 module.exports = {
 
   index: function(req, res) {

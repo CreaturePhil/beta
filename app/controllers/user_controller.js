@@ -5,6 +5,7 @@ var nodemailer = require('nodemailer');
 
 var User = require('../models/user');
 var secrets = require('../../config/secrets');
+var validators = require('../../lib/validators');
 
 module.exports = {
 
@@ -14,13 +15,7 @@ module.exports = {
       res.render('user/signup', { title: 'Create Account' });
     },
     post: function(req, res, next) {
-      req.assert('username', 'Only letters and numbers are allow in username.').regexMatch(/^[A-Za-z0-9]*$/);
-      req.assert('username', 'Username cannot be more than 30 characters.').len(1, 30);
-      req.assert('email', 'Email is not valid.').isEmail();
-      req.assert('password', 'Password must be between 4 to 300 characters long.').len(4, 300);
-      req.assert('confirmPassword', 'Passwords do not match.').equals(req.body.password);
-
-      var errors = req.validationErrors();
+      var errors = validators.signupValidation(req);
 
       if (errors) {
         req.flash('errors', errors);
@@ -79,11 +74,7 @@ module.exports = {
       res.render('user/login', { title: 'Login' });
     },
     post: function(req, res, next) {
-      req.assert('username', 'Only letters and numbers are allow in username.').regexMatch(/^[A-Za-z0-9]*$/);
-      req.assert('username', 'Username cannot be more than 30 characters.').len(1, 30);
-      req.assert('password', 'Password cannot be blank').notEmpty();
-
-      var errors = req.validationErrors();
+      var errors = validators.loginValidation(req);
 
       if (errors) {
         req.flash('errors', errors);
