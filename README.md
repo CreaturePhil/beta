@@ -1,5 +1,9 @@
 # beta 
 
+[![Build Status](https://travis-ci.org/CreaturePhil/beta.svg)](https://travis-ci.org/CreaturePhil/beta)
+[![Dependency Status](https://david-dm.org/creaturephil/beta.svg)](https://david-dm.org/creaturephil/beta)
+[![devDependency Status](https://david-dm.org/creaturephil/beta/dev-status.svg)](https://david-dm.org/creaturephil/beta#info=devDependencies)
+
 An Express' opinionated boilerplate for Node.js web applications.
 
 ## Getting Started
