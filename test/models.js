@@ -33,6 +33,8 @@ describe('User Model', function() {
     User.findOne({ email: 'test@gmail.com' }, function(err, user) {
       if (err) return done(err);
       user.email.should.equal('test@gmail.com');
+      user.getHash().should.be.a('string');
+      user.gravatar().should.be.a('string');
       done();
     });
   });

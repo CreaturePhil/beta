@@ -56,3 +56,27 @@ describe('GET /settings/account', function() {
       .expect(302, done);
   });
 });
+
+describe('GET /settings/password', function() {
+  it('should return 302 Redirect', function(done) {
+    request(app)
+      .get('/settings/password')
+      .expect(302, done);
+  });
+});
+
+describe('GET /settings/delete', function() {
+  it('should return 302 Redirect', function(done) {
+    request(app)
+      .get('/settings/delete')
+      .expect(302, done);
+  });
+});
+
+describe('GET /api/users', function() {
+  it('should return 200 OK', function(done) {
+    request(app)
+      .get('/api/users')
+      .expect(200, done);
+  });
+});
