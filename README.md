@@ -8,7 +8,7 @@ An Express' opinionated boilerplate for Node.js web applications.
 $ git clone https://github.com/CreaturePhil/alpha.git myproject
 $ cd myproject
 $ npm install && bower install
-$ npm start
+$ grunt && npm start
 ```
 
 ## Project Structure

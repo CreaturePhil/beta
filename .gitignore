@@ -9,3 +9,7 @@ coverage
 
 # bower_components
 public/bower_components
+
+# Client-side minified css and javascript
+public/css/main.min.css
+public/js/main.min.js
