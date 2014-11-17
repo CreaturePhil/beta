@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha --reporter=spec --timeout=10000 && grunt test",
+    "test": "grunt test && mocha --reporter=spec --timeout=10000",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --timeout=10000",
     "codeclimate": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | codeclimate && rm -rf ./coverage"
   },
@@ -34,6 +34,7 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "chai": "^1.10.0",
     "chalk": "^0.5.1",
     "codeclimate-test-reporter": "0.0.4",
     "grunt": "^0.4.5",
