@@ -35,6 +35,7 @@ describe('User Model', function() {
       user.email.should.equal('test@gmail.com');
       user.getHash().should.be.a('string');
       user.gravatar().should.be.a('string');
+      user.gravatar(200).should.be.a('string');
       done();
     });
   });
