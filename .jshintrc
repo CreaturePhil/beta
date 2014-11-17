@@ -1,5 +1,9 @@
 {
   "curly": false,
-  "maxcomplexity": 100,
-  "node": true
+  "node": true,
+  "indent": 2,
+  "maxdepth": false,
+  "maxstatements": false,
+  "maxcomplexity": false,
+  "mocha": true
 }

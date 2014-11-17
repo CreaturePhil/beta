@@ -14,21 +14,6 @@ module.exports = {
 
   hash: 'Your Hash Secret here',
 
-  banUsernames: []
+  banUsernames: ['about', 'signup', 'login', 'logout', 'forgot_password', 'reset_password', 'settings', 'api']
 
 };
-
-/**
- * Ban usernames that are the same as routes because
- * the server maps username to the index route (/).
- */
-function getBanUsernames() {
-  var usernames = [];
-  var routes = router.stack;
-  var len = routes.length;
-  while(len--) {
-    usernames.push(routes[len].route.path.substr(1));
-  }
-  
-  return usernames;
-}
