@@ -1,4 +1,6 @@
 var request = require('supertest');
+var chai = require('chai');
+var should = chai.should();
 var app = require('../server.js');
 
 describe('GET /', function() {
@@ -73,10 +75,49 @@ describe('GET /settings/delete', function() {
   });
 });
 
+describe('GET /logout', function() {
+  it('should return 302 Redirect', function(done) {
+    request(app)
+      .get('/logout')
+      .expect(302, done);
+  });
+});
+
 describe('GET /api/users', function() {
   it('should return 200 OK', function(done) {
     request(app)
       .get('/api/users')
       .expect(200, done);
+  });
+});
+
+describe('POST /signup', function() {
+  it('should return 500 Internal Server Error', function(done) {
+    request(app)
+      .post('/signup')
+      .field('username', 'test')
+      .field('email', 'test@test.com')
+      .field('password', 'testpass')
+      .field('confirmPassword', 'testpass')
+      .expect(500, done);
+  });
+});
+
+describe('POST /login', function() {
+  it('should return 500 Internal Server Error', function(done) {
+    request(app)
+      .post('/login')
+      .field('username', 'test')
+      .field('password', 'testpass')
+      .expect(500, done);
+  });
+});
+
+describe('NODE_ENV to production', function() {
+  it('should be production env', function(done) {
+    app.set('env', 'production');
+    app.get('env').should.equal('production');
+    app = require('../server.js');
+    done();
   });
 });
