@@ -52,7 +52,7 @@ describe('GET /forgot_password', function() {
 describe('GET /settings/account', function() {
   it('should return 302 Redirect', function(done) {
     request(app)
-      .get('/forgot_password')
+      .get('/settings/account')
       .expect(302, done);
   });
 });
