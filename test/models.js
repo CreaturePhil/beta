@@ -36,7 +36,7 @@ describe('User Model', function() {
       user.getHash().should.be.a('string');
       user.gravatar().should.be.a('string');
       user.gravatar(200).should.be.a('string');
-      user.comparePassword(user.password, function(err, isMatch) {
+      user.comparePassword('password', function(err, isMatch) {
         isMatch.should.equal(true);
       });
       user.comparePassword('test', function(err, isMatch) {
