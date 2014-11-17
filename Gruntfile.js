@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         files: {
           'public/js/main.js': [ 
             'public/bower_components/bootstrap/dist/js/bootstrap.js',
-            'public/js/instantclick.js',
+            'public/bower_components/instantclick/instantclick.js',
             'public/js/scripts.js']
         }
       },
