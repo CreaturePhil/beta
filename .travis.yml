@@ -3,3 +3,8 @@ node_js:
   - '0.10'
 services:
   - mongodb
+addons:
+  code_climate:
+    repo_token: a49b00bee43764b2fa5be8d9fb64273e680ad9a306dbd5907efe341d2ef33a10
+after_script:
+  - npm run codeclimate
