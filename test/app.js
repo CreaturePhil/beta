@@ -2,6 +2,7 @@ var request = require('supertest');
 var chai = require('chai');
 var should = chai.should();
 var app = require('../server.js');
+var User = require('../app/models/user');
 
 describe('GET /', function() {
   it('should return 200 OK', function(done) {
@@ -85,9 +86,25 @@ describe('GET /logout', function() {
 
 describe('GET /api/users', function() {
   it('should return 200 OK', function(done) {
-    request(app)
-      .get('/api/users')
-      .expect(200, done);
+    var user = new User({
+      uid: 'test',
+      username: 'Test',
+      email: 'test@gmail.com',
+      password: 'password'
+    });
+    user.save(function(err, newUser) {
+      if (err) return done(err);
+      request(app)
+        .get('/api/users')
+        .expect(200);
+      request(app)
+        .get('/api/users/' + newUser.getHash())
+        .expect(200);
+      User.remove({ email: 'test@gmail.com' }, function(err) {
+        if (err) return done(err);
+        done();
+      });
+    });
   });
 });
 
