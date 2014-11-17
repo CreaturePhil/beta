@@ -59,7 +59,7 @@ module.exports = {
           });
         },
         function(done) {
-          user.save(function(err) {
+          user.save(function() {
             req.logIn(user, function(err) {
               req.flash('success', { msg: 'Success! Your account has been created.' });
               done(err);

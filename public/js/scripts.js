@@ -9,5 +9,7 @@
     $count.text((160 - $(this).val().length));
   });
 
-  InstantClick.init();
+  if (InstantClick) {
+    InstantClick.init();
+  }
 })();
