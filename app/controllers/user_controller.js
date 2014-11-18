@@ -113,9 +113,7 @@ module.exports = {
       res.render('user/forgot_password', { title: 'Forgot Password' });
     },
     post: function(req, res, next) {
-      req.assert('email', 'Please enter a valid email address.').isEmail();
-
-      var errors = req.validationErrors();
+      var errors = validators.forgotPasswordValidation(req);
 
       if (errors) {
         req.flash('errors', errors);
@@ -183,10 +181,7 @@ module.exports = {
         });
     },
     post: function(req, res, next) {
-      req.assert('password', 'Password must be at least 4 characters long.').len(4);
-      req.assert('confirmPassword', 'Passwords must match.').equals(req.body.password);
-
-      var errors = req.validationErrors();
+      var errors = validators.resetPasswordValidation(req);
 
       if (errors) {
         req.flash('errors', errors);
@@ -249,16 +244,7 @@ module.exports = {
       });
     },
     post: function(req, res, next) {
-      var VALID_IMG_REGEX = /(https?:\/\/.*\.(?:png|jpg|gif))/i;
-
-      if (req.body.avatar) req.assert('avatar', 'Must be .png, .jpg, or .gif').regexMatch(VALID_IMG_REGEX);
-      if (req.body.website) req.assert('website', 'Invalid website url.').regexMatch(/https?:\/\/.{1,}\..{1,}/);
-      req.assert('username', 'Only letters and numbers are allow in username.').regexMatch(/^[A-Za-z0-9]*$/);
-      req.assert('username', 'Username cannot be more than 30 characters.').len(1, 30);
-      req.assert('email', 'Email is not valid.').isEmail();
-      req.assert('bio', 'Bio must be less than or equal to 160 characters.').len(0, 160);
-
-      var errors = req.validationErrors();
+      var errors = validators.accountSettingsValidation(req);
 
       if (errors) {
         req.flash('errors', errors);
@@ -292,10 +278,7 @@ module.exports = {
       });
     },
     post: function(req, res, next) {
-      req.assert('password', 'Password must be at least 4 characters long').len(4);
-      req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
-
-      var errors = req.validationErrors();
+      var errors = validators.updatePasswordValidation(req);
 
       if (errors) {
         req.flash('errors', errors);

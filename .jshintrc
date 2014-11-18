@@ -4,6 +4,5 @@
   "indent": 2,
   "maxdepth": false,
   "maxstatements": false,
-  "maxcomplexity": false,
-  "mocha": true
+  "maxcomplexity": false
 }
