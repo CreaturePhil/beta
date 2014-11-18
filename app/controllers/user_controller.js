@@ -113,7 +113,7 @@ module.exports = {
       res.render('user/forgot_password', { title: 'Forgot Password' });
     },
     post: function(req, res, next) {
-      var errors = validators.forgotPasswordValidation(req);
+      var errors = validators.passwordValidation(req);
 
       if (errors) {
         req.flash('errors', errors);
@@ -181,7 +181,7 @@ module.exports = {
         });
     },
     post: function(req, res, next) {
-      var errors = validators.resetPasswordValidation(req);
+      var errors = validators.passwordValidation(req);
 
       if (errors) {
         req.flash('errors', errors);
