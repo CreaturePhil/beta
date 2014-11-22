@@ -3,8 +3,6 @@
 [![Build Status](https://travis-ci.org/CreaturePhil/beta.svg)](https://travis-ci.org/CreaturePhil/beta)
 [![Dependency Status](https://david-dm.org/creaturephil/beta.svg)](https://david-dm.org/creaturephil/beta)
 [![devDependency Status](https://david-dm.org/creaturephil/beta/dev-status.svg)](https://david-dm.org/creaturephil/beta#info=devDependencies)
-[![Code Climate](https://codeclimate.com/github/CreaturePhil/beta/badges/gpa.svg)](https://codeclimate.com/github/CreaturePhil/beta)
-[![Test Coverage](https://codeclimate.com/github/CreaturePhil/beta/badges/coverage.svg)](https://codeclimate.com/github/CreaturePhil/beta)
 
 An Express' opinionated boilerplate for Node.js web applications.
 
@@ -16,14 +14,6 @@ $ cd myproject
 $ npm install && bower install
 $ grunt && npm start
 ```
-
-## Project Structure
-
-WIP
-
-## Deployment and Configuration
-
-WIP
 
 ## License
 
