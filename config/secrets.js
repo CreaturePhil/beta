@@ -12,7 +12,7 @@ module.exports = {
     password: process.env.SENDGRID_PASSWORD || 'hspassword00'
   },
 
-  hash: 'Your Hash Secret here',
+  hash: process.env.HASH || 'Your Hash Secret here',
 
   banUsernames: ['about', 'signup', 'login', 'logout', 'forgot_password', 'reset_password', 'settings', 'api']
 
