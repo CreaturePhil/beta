@@ -1,6 +1,7 @@
 {
   "name": "beta",
   "version": "0.0.0",
+  "description": "An Express' opinionated boilerplate for Node.js web applications.",
   "scripts": {
     "start": "node ./bin/www",
     "test": "grunt test && mocha --reporter=spec --timeout=10000",
@@ -14,6 +15,7 @@
     "async": "^0.9.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.9.2",
+    "chalk": "^0.5.1",
     "compression": "^1.2.0",
     "connect-mongo": "^0.4.1",
     "cookie-parser": "^1.3.3",
@@ -25,16 +27,17 @@
     "hashids": "^1.0.1",
     "jade": "^1.7.0",
     "lusca": "^1.0.2",
+    "method-override": "^2.3.0",
     "moment": "^2.8.3",
     "mongoose": "^3.8.18",
     "morgan": "^1.4.1",
     "nodemailer": "^1.3.0",
     "passport": "^0.2.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "serve-favicon": "^2.1.7"
   },
   "devDependencies": {
     "chai": "^1.10.0",
-    "chalk": "^0.5.1",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-concat": "^0.5.0",
