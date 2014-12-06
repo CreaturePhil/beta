@@ -1,6 +1,3 @@
-var router = require('./routes');
-var debug = require('../lib/debug');
-
 module.exports = {
 
   db: process.env.MONGODB || 'mongodb://localhost:27017/test',
@@ -14,6 +11,11 @@ module.exports = {
 
   hash: process.env.HASH || 'Your Hash Secret here',
 
-  banUsernames: ['about', 'signup', 'login', 'logout', 'forgot_password', 'reset_password', 'settings', 'api']
+  banUsernames: [ 'about', 
+                  'signup',
+                  'login',
+                  'logout',
+                  'settings',
+                  'api' ]
 
 };

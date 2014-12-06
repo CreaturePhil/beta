@@ -48,6 +48,7 @@ if (app.get('env') === 'development') {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride());
 app.use(expressValidator({ customValidators: validators }));
 app.use(cookieParser());
 app.use(session({
@@ -80,7 +81,8 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+// static cache for one week
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: 604800000 }));
 
 // routes setup
 app.use('/', routes);
