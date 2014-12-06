@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')({ session: session });
 var expressValidator = require('express-validator');
+var methodOverride = require('method-override');
 var flash = require('express-flash');
 var mongoose = require('mongoose');
 var passport = require('passport');
